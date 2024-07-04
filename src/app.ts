@@ -1,9 +1,14 @@
+import fastifyjwt from "@fastify/jwt";
 import fastify, { FastifyReply } from "fastify";
 import { ZodError } from "zod";
 import { env } from "./env";
 import { appRoutes } from "./http/routes";
 
 export const app = fastify();
+
+app.register(fastifyjwt, {
+  secret: env.JWT_SECRET,
+});
 
 app.register(appRoutes);
 
